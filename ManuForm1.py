@@ -57,6 +57,11 @@ keyUp = key(ySize = 1, extraDepth = 10, ybot = 1)
 keyUp.rotate(Vector(0,0,7.5), Vector(1,0,0), KEYWELL_CURVE)
 keyUp.translate(Vector(0,KEYDIST,0))
 
+keyUpper=key(ySize = 1, extraDepth = 10, ybot = 1)
+keyUpper.rotate(Vector(0,-KEYDIST,7.5), Vector(1,0,0), KEYWELL_CURVE*2)
+keyUpper.translate(Vector(0,KEYDIST*2,-5))
+
+
 keyDown = key(ySize = 1, extraDepth = 10, ytop = 1)
 #keyDown.translate(Vector(0,(-KEYDIST*0.1)/2,0))
 
@@ -64,15 +69,24 @@ keyDown.rotate(Vector(0,KEYDIST,7.5), Vector(1,0,0), -KEYWELL_CURVE)
 keyDown.translate(Vector(0,-KEYDIST,0))
 
 
+
 columnBaseTrim = Part.makeBox(500, 500, 10)
+columnAdditionalTrim=Part.makeBox(500,500,10)
+columnAdditionalTrim.rotate(Vector(0,-KEYDIST,7.5), Vector(1,0,0), KEYWELL_CURVE*2)
+columnAdditionalTrim.translate(Vector(0,250+KEYDIST*2-3,-10))
+
+columnBaseTrim=columnBaseTrim.fuse(columnAdditionalTrim)
 columnBaseTrim.translate(Vector(-250,-250,-12))
 
 
 
 
 
-column = keyMiddle.fuse(keyUp).fuse(keyDown)
+#column = keyMiddle.fuse(keyUp).fuse(keyDown)
+column = keyMiddle.fuse(keyUp).fuse(keyDown).fuse(keyUpper)
 column = column.cut(columnBaseTrim)
+#column = column.fuse(columnBaseTrim)
+
 column.rotate(Vector(0,0,0), Vector(1,0,0), KEYWELL_CURVE/2)
 
 column2 = column.copy()
@@ -128,4 +142,4 @@ Part.show(columns)
 Part.show(longThumb1)
 Part.show(longThumb2)
 Part.show(shortThumb)
-
+#Part.show(column)
