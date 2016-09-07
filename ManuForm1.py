@@ -1,4 +1,12 @@
+import sys
+sys.path.append('~/workspace/ManuForm')
+
 from FreeCAD import *
+import Part
+
+doc=FreeCAD.ActiveDocument
+for obj in doc.Objects:
+	doc.removeObject(obj.Label)
 
 KEYDIST = 19.05
 KEYWELL_CURVE = 15 # degrees
@@ -77,10 +85,12 @@ column4 = column.copy()
 column4.translate(Vector(KEYDIST * 3, 0, 0))
 
 column5 = column.copy()
-column5.translate(Vector(KEYDIST * 4, -KEYDIST * 1.25, 0))
+#column5.translate(Vector(KEYDIST * 4, -KEYDIST * 1.25, 0))
+column5.translate(Vector(KEYDIST * 4, -KEYDIST * 0.5, 0))
 
 column6 = column.copy()
-column6.translate(Vector(KEYDIST * 5, -KEYDIST * 1.25, 0))
+#column6.translate(Vector(KEYDIST * 5, -KEYDIST * 1.25, 0))
+column6.translate(Vector(KEYDIST * 5, -KEYDIST * 0.5, 0))
 
 columns = column.fuse(column2).fuse(column3).fuse(column4).fuse(column5).fuse(column6)
 
